@@ -1,0 +1,107 @@
+
+💡 **Question 1**
+
+Convert 1D Array Into 2D Array
+
+You are given a **0-indexed** 1-dimensional (1D) integer array original, and two integers, m and n. You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using **all** the elements from original.
+
+The elements from indices 0 to n - 1 (**inclusive**) of original should form the first row of the constructed 2D array, the elements from indices n to 2 * n - 1 (**inclusive**) should form the second row of the constructed 2D array, and so on.
+
+Return *an* m x n *2D array constructed according to the above procedure, or an empty 2D array if it is impossible*.
+
+
+Ans - function construct2DArray(original, m, n) {
+  const len = original.length;
+  
+  if (m * n !== len) {
+    return [];
+  }
+  
+  const result = [];
+  
+  for (let i = 0; i < len; i += n) {
+    result.push(original.slice(i, i + n));
+  }
+  
+  return result;
+}
+
+// Test the function with the given example
+const original = [1, 2, 3, 4];
+const m = 2;
+const n = 2;
+
+const constructedArray = construct2DArray(original, m, n);
+console.log(constructedArray);
+
+
+
+💡 **Question 2**
+
+You have n coins and you want to build a staircase with these coins. The staircase consists of k rows where the ith row has exactly i coins. The last row of the staircase **may be** incomplete.
+
+Given the integer n, return *the number of **complete rows** of the staircase you will build*.
+
+Ans - function arrangeCoins(n) {
+  let count = 0;
+  let currRowCoins = 1;
+  
+  while (n >= currRowCoins) {
+    n -= currRowCoins;
+    count++;
+    currRowCoins++;
+  }
+  
+  return count;
+}
+
+// Test the function with the given example
+const n = 5;
+
+const completeRows = arrangeCoins(n);
+console.log(completeRows);
+
+
+💡 **Question 3**
+
+Given an integer array nums sorted in **non-decreasing** order, return *an array of **the squares of each number** sorted in non-decreasing order*.
+
+Ans - function sortedSquares(nums) {
+  const squaredNums = nums.map(num => num ** 2);
+  squaredNums.sort((a, b) => a - b);
+  return squaredNums;
+}
+
+// Test the function with the given example
+const nums = [-4, -1, 0, 3, 10];
+
+const squaredSorted = sortedSquares(nums);
+console.log(squaredSorted);
+
+Question - 6 
+Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears **once** or **twice**, return *an array of all the integers that appears **twice***.
+
+You must write an algorithm that runs in O(n) time and uses only constant extra space.
+
+Ans - function findDuplicates(nums) {
+  const result = [];
+  
+  for (let i = 0; i < nums.length; i++) {
+    const num = Math.abs(nums[i]);
+    if (nums[num - 1] < 0) {
+      result.push(num);
+    } else {
+      nums[num - 1] *= -1;
+    }
+  }
+  
+  return result;
+}
+
+// Test the function with the given example
+const nums = [4, 3, 2, 7, 8, 2, 3, 1];
+
+const duplicates = findDuplicates(nums);
+console.log(duplicates);
+
+
